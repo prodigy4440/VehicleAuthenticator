@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2014 10:48:17 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.prodigy4440.model.Account" table="Account" catalog="VehicleAuthenticator">
+        <id name="accountId" type="java.lang.Integer">
+            <column name="accountId" />
+            <generator class="identity" />
+        </id>
+        <property name="surname" type="string">
+            <column name="surname" length="45" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" length="45" />
+        </property>
+        <property name="staffId" type="string">
+            <column name="staffId" length="45" />
+        </property>
+        <property name="userType" type="char">
+            <column name="userType" length="1" not-null="true" />
+        </property>
+        <property name="userName" type="string">
+            <column name="userName" length="45" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" />
+        </property>
+        <property name="secuirityQuestion" type="string">
+            <column name="secuirityQuestion" length="65535" />
+        </property>
+        <property name="secuirityAnswer" type="string">
+            <column name="secuirityAnswer" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>
