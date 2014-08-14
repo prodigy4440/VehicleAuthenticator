@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 13, 2014 10:48:17 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.prodigy4440.model.Entry" table="Entry" catalog="VehicleAuthenticator">
+        <id name="entryId" type="java.lang.Integer">
+            <column name="entryId" />
+            <generator class="identity" />
+        </id>
+        <property name="tag" type="string">
+            <column name="tag" length="45" />
+        </property>
+        <property name="plateNumber" type="string">
+            <column name="plateNumber" length="45" />
+        </property>
+        <property name="driverImage" type="binary">
+            <column name="driverImage" />
+        </property>
+        <property name="entryType" type="java.lang.Character">
+            <column name="entryType" length="1" />
+        </property>
+        <property name="registrationNo" type="string">
+            <column name="registrationNo" length="45" />
+        </property>
+        <property name="timeIn" type="timestamp">
+            <column name="timeIn" length="19" />
+        </property>
+        <property name="timeOut" type="string">
+            <column name="timeOut" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
