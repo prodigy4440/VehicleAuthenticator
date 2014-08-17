@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 14, 2014 11:29:29 AM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.prodigy4440.model.Registration" table="Registration" catalog="VehicleAuthenticator">
+        <id name="registrationId" type="java.lang.Integer">
+            <column name="registrationId" />
+            <generator class="identity" />
+        </id>
+        <property name="driverSurname" type="string">
+            <column name="driverSurname" length="45" />
+        </property>
+        <property name="driverLastName" type="string">
+            <column name="driverLastName" length="45" />
+        </property>
+        <property name="driverOccupation" type="string">
+            <column name="driverOccupation" length="45" />
+        </property>
+        <property name="driverSex" type="java.lang.Character">
+            <column name="driverSex" length="1" />
+        </property>
+        <property name="driverAge" type="java.lang.Integer">
+            <column name="driverAge" />
+        </property>
+        <property name="driverAddress" type="string">
+            <column name="driverAddress" length="65535" />
+        </property>
+        <property name="driverDisabilities" type="string">
+            <column name="driverDisabilities" length="256" />
+        </property>
+        <property name="driverNationality" type="string">
+            <column name="driverNationality" length="45" />
+        </property>
+        <property name="driverPhoneNumber" type="string">
+            <column name="driverPhoneNumber" length="45" />
+        </property>
+        <property name="driverPassport" type="binary">
+            <column name="driverPassport" />
+        </property>
+        <property name="licenseId" type="string">
+            <column name="licenseId" length="90" />
+        </property>
+        <property name="licenseName" type="string">
+            <column name="licenseName" length="45" />
+        </property>
+        <property name="licenseExpiryDate" type="date">
+            <column name="licenseExpiryDate" length="10" />
+        </property>
+        <property name="vehicleMake" type="string">
+            <column name="vehicleMake" length="45" />
+        </property>
+        <property name="vehicleModel" type="string">
+            <column name="vehicleModel" length="45" />
+        </property>
+        <property name="vehicleColor" type="string">
+            <column name="vehicleColor" length="45" />
+        </property>
+        <property name="vehiclePlateNumber" type="string">
+            <column name="vehiclePlateNumber" length="45" />
+        </property>
+        <property name="vehicleVin" type="string">
+            <column name="vehicleVin" length="45" />
+        </property>
+        <property name="registrationNo" type="string">
+            <column name="registrationNo" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
