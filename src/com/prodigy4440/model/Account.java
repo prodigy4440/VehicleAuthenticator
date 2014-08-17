@@ -1,5 +1,5 @@
 package com.prodigy4440.model;
-// Generated Aug 13, 2014 10:48:16 AM by Hibernate Tools 3.6.0
+// Generated Aug 14, 2014 11:29:28 AM by Hibernate Tools 3.6.0
 
 
 
@@ -100,6 +100,9 @@ public class Account  implements java.io.Serializable {
     public void setSecuirityAnswer(String secuirityAnswer) {
         this.secuirityAnswer = secuirityAnswer;
     }
+
+
+
 
 }
 

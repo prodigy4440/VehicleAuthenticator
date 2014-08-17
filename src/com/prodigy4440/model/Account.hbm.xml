@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 13, 2014 10:48:17 AM by Hibernate Tools 3.6.0 -->
+<!-- Generated Aug 14, 2014 11:29:29 AM by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.prodigy4440.model.Account" table="Account" catalog="VehicleAuthenticator">
         <id name="accountId" type="java.lang.Integer">

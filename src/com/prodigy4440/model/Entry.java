@@ -1,5 +1,5 @@
 package com.prodigy4440.model;
-// Generated Aug 13, 2014 10:48:16 AM by Hibernate Tools 3.6.0
+// Generated Aug 14, 2014 11:29:28 AM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -17,12 +17,12 @@ public class Entry  implements java.io.Serializable {
      private Character entryType;
      private String registrationNo;
      private Date timeIn;
-     private String timeOut;
+     private Date timeOut;
 
     public Entry() {
     }
 
-    public Entry(String tag, String plateNumber, byte[] driverImage, Character entryType, String registrationNo, Date timeIn, String timeOut) {
+    public Entry(String tag, String plateNumber, byte[] driverImage, Character entryType, String registrationNo, Date timeIn, Date timeOut) {
        this.tag = tag;
        this.plateNumber = plateNumber;
        this.driverImage = driverImage;
@@ -81,13 +81,21 @@ public class Entry  implements java.io.Serializable {
     public void setTimeIn(Date timeIn) {
         this.timeIn = timeIn;
     }
-    public String getTimeOut() {
+    public Date getTimeOut() {
         return this.timeOut;
     }
     
-    public void setTimeOut(String timeOut) {
+    public void setTimeOut(Date timeOut) {
         this.timeOut = timeOut;
     }
+
+    @Override
+    public String toString() {
+        return "Entry{" + "entryId=" + entryId + ", tag=" + tag + ", plateNumber=" + plateNumber + ", driverImage=" + driverImage + ", entryType=" + entryType + ", registrationNo=" + registrationNo + ", timeIn=" + timeIn + ", timeOut=" + timeOut + '}';
+    }
+
+
+
 
 }
 
