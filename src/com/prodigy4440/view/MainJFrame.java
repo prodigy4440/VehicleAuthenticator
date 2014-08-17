@@ -6,10 +6,18 @@
 package com.prodigy4440.view;
 
 import com.prodigy4440.model.Account;
+import com.prodigy4440.model.Entry;
+import com.prodigy4440.model.EntryTableModel;
+import com.prodigy4440.model.HibernateUtil;
+import com.prodigy4440.model.RegisterTableModel;
+import com.prodigy4440.model.Registration;
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,8 +26,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 /**
  *
@@ -65,19 +76,28 @@ public class MainJFrame extends JFrame {
 
     private JToolBar toolBar;
     private JTable table;
-    
+
     private Account account;
+
+    private EntryTableModel entryTableModel;
+    private RegisterTableModel registerTableModel;
 
     public MainJFrame(Account a) {
         initComponents();
         this.account = a;
-//        this.setLocationRelativeTo(null);
     }
 
     public final void initComponents() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Vehicle Authenticator");
         table = new JTable();
+        entryTableModel = new EntryTableModel();
+        registerTableModel = new RegisterTableModel();
+
+        loadEntryData();
+        loadRegistrationData();
+
+        table.setModel(entryTableModel);
 
         ActionHandler actionHandler = new ActionHandler(this);
 
@@ -181,12 +201,12 @@ public class MainJFrame extends JFrame {
         menuBar.add(helpJMenu);
 
         //Create and Add ToolBar to the north panel
-        toolBar =createJToolBar(false);
+        toolBar = createJToolBar(false);
         toolBarJPanel.add(toolBar);
-        
+
         //Add table to the main panel
-        mainJPanel.add(table,BorderLayout.CENTER);
-        
+        mainJPanel.add(new JScrollPane(table), BorderLayout.CENTER);
+
         //setting up the frame
         this.setJMenuBar(menuBar);
         this.add(toolBarJPanel, BorderLayout.NORTH);
@@ -217,9 +237,8 @@ public class MainJFrame extends JFrame {
         updateUserJButton.setToolTipText("Update User");
         JButton deleteUserJButton = new JButton(new ImageIcon(getClass().getResource("/com/prodigy4440/resources/deleteuser.jpg")));
         deleteUserJButton.setToolTipText("Delete User");
-        
-        
-        if(status){
+
+        if (status) {
             vehicleUpdateJButton.setEnabled(false);
             vehicleDeleteJButton.setEnabled(false);
             newUserJButton.setEnabled(false);
@@ -238,8 +257,63 @@ public class MainJFrame extends JFrame {
         tB.add(newUserJButton);
         tB.add(updateUserJButton);
         tB.add(deleteUserJButton);
-        
+
         return tB;
+    }
+
+    public void loadEntryData() {
+        if (entryTableModel.getRowCount() != 0) {
+            entryTableModel.clearEntry();
+        }
+
+        Entry entry = new Entry("XXXXX", "XXXXXX", null, 'R', "ZXZZZZ", new Date(), new Date());
+        Entry entry1 = new Entry("WWWWW", "JDBNSJS", null, 'V', "JSJUSS", new Date(), new Date());
+        entryTableModel.addEntry(entry);
+        entryTableModel.addEntry(entry1);
+        Runnable runnable = new Runnable() {
+
+            @Override
+            public void run() {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                Query query = session.createQuery("FROM Entry");
+                List list = query.list();
+
+                for (Object object : list) {
+                    Entry entry = (Entry) object;
+                    entryTableModel.addEntry(entry);
+                }
+
+            }
+        };
+
+        EventQueue.invokeLater(runnable);
+
+    }
+
+    public void loadRegistrationData() {
+        if (registerTableModel.getRowCount() != 0) {
+            registerTableModel.clearRegistrations();
+        }
+        Registration registration = new Registration("AZEEZ", "Isau", "Student", 'M', 25, "OAU", "None", "Nigeria", "08131631151", null, "JUDHKSIS", "AZEEZ Isau O", new Date(), "Toyota", "Corolla", "Yellow", "JDUENKDJWS", "VIN", "MFJDNDFSK");
+        registerTableModel.addRegistration(registration);
+
+        Runnable runnable = new Runnable() {
+
+            @Override
+            public void run() {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                Query query = session.createQuery("FROM Registration");
+                List list = query.list();
+                for (Object object : list) {
+                    Registration registration = (Registration) object;
+                    registerTableModel.addRegistration(registration);
+                }
+            }
+        };
+
+        EventQueue.invokeLater(runnable);
     }
 
     public class ActionHandler implements ActionListener {
@@ -254,7 +328,8 @@ public class MainJFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == newEntryJMenuItem) {
-                JOptionPane.showMessageDialog(frame, "Operation", e.getActionCommand() + " under construction ", JOptionPane.INFORMATION_MESSAGE);
+                NewEntryJDialog newEntryJDialog = new NewEntryJDialog("Vehicle Pass", frame);
+                newEntryJDialog.setVisible(true);
             } else if (e.getSource() == vehicleExitJMenuItem) {
                 JOptionPane.showMessageDialog(frame, "Operation", e.getActionCommand() + " under construction ", JOptionPane.INFORMATION_MESSAGE);
             } else if (e.getSource() == saveAsJMenuItem) {
@@ -270,9 +345,9 @@ public class MainJFrame extends JFrame {
             } else if (e.getSource() == deleteVehicleJMenuItem) {
                 JOptionPane.showMessageDialog(frame, "Operation", e.getActionCommand() + " under construction ", JOptionPane.INFORMATION_MESSAGE);
             } else if (e.getSource() == entriesViewJMenuItem) {
-                JOptionPane.showMessageDialog(frame, "Operation", e.getActionCommand() + " under construction ", JOptionPane.INFORMATION_MESSAGE);
+               table.setModel(entryTableModel);
             } else if (e.getSource() == registrationViewJMenuItem) {
-                JOptionPane.showMessageDialog(frame, "Operation", e.getActionCommand() + " under construction ", JOptionPane.INFORMATION_MESSAGE);
+                table.setModel(registerTableModel);
             } else if (e.getSource() == newUserJMenuItem) {
                 JOptionPane.showMessageDialog(frame, "Operation", e.getActionCommand() + " under construction ", JOptionPane.INFORMATION_MESSAGE);
             } else if (e.getSource() == updateUserJMenuItem) {
@@ -295,6 +370,5 @@ public class MainJFrame extends JFrame {
 
         }
     }
-
 
 }
